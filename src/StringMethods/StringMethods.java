@@ -32,13 +32,28 @@ public class StringMethods {
 
 	// Given Strings s1 and s2, return the longer String
 	public static String longerString(String s1, String s2) {
-		return null;
+		String longer = "";
+		if (s1.length() > s2.length()) {
+			longer = s1;
+		}
+		else {
+			longer = s2;
+		}
+		return longer;
+		
 	}
 
 	
 	// if String s contains the word "underscores", change all of the spaces to underscores
 	public static String formatSpaces(String s) {
-		return null;
+		if (s.contains("underscores")) {
+			for (int i = 0; i < s.length(); i++) {
+				if (s.charAt(i) == ' ') {
+					s = s.replace(' ', '_');
+				}
+			}
+		}
+		return s;
 	}
 
 	
@@ -46,19 +61,50 @@ public class StringMethods {
 	// You cannot assume there are no extra spaces around the name, but you can
 	// assume there is only one space between the first and last name
 	public static String lineLeader(String s1, String s2, String s3) {
-		return null;
+		String winner = "";
+		s1 = s1.trim();
+		s2 = s2.trim();
+		s3 = s3.trim();
+		char sq1 =s1.charAt(s1.length()-1);
+		char sq2 = s2.charAt(s2.length()-1);
+		char sq3 = s3.charAt(s3.length()-1);
+		if (sq1 < sq2 && sq1 < sq3) {
+			winner = s1;
+		}
+		else if (sq2 < sq1 && sq2<sq3) {
+			winner = s2;
+		}
+		else if (sq3<sq1 && sq3<sq2) {
+			winner = s3;
+		}
+		
+		return winner;
 	}
 	
 	
 	// Return the sum of all numerical digits in the String
 	public static int numeralSum(String s) {
-		return 0;
+		int z = 0;
+		for (int i = 0; i < s.length(); i++) {
+			if (Character.isDigit(s.charAt(i))) {
+				z+= Character.getNumericValue(s.charAt(i));
+			}
+		}
+		return z;
 	}
 	
 	
 	// Return the number of times String substring appears in String s
 	public static int substringCount(String s, String substring) {
-		return 0;
+		int count = 0;
+		int index = 0;
+		boolean t = false;
+		
+		while  (s.indexOf(substring,index)>= 0) {
+			count+=1;
+			index = s.indexOf(substring, index)+1;
+	}
+		return count;
 	}
 
 	// Call Utitilities.encrypt to encrypt String s
@@ -98,7 +144,7 @@ public class StringMethods {
 
 class Utilities {
 	// This basic encryption scheme is called single-byte xor. It takes a single
-	// byte and uses exclusive-or on every character in the String.
+	// byte and uses exclusive-or on every cha)racter in the String.
 	public static String encrypt(byte[] plaintext, byte key) {
 		for (int i = 0; i < plaintext.length; i++) {
 			plaintext[i] = (byte) (plaintext[i] ^ key);
