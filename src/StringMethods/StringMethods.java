@@ -109,8 +109,10 @@ public class StringMethods {
 
 	// Call Utitilities.encrypt to encrypt String s
 	public static String encrypt(String s, char key) {
+		Utilities.encrypt(s.getBytes(), key);
 		return null;
 	}
+	
 
 	// Call Utilities.decrypt to decrypt the cyphertext
 	public static String decrypt(String s, char key) {
