@@ -109,21 +109,39 @@ public class StringMethods {
 
 	// Call Utitilities.encrypt to encrypt String s
 	public static String encrypt(String s, char key) {
-		Utilities.encrypt(s.getBytes(), key);
-		return null;
+		byte b = (byte) key;
+		return Utilities.encrypt(s.getBytes(), b);
 	}
 	
 
 	// Call Utilities.decrypt to decrypt the cyphertext
 	public static String decrypt(String s, char key) {
-		return null;
+		byte b = (byte) key;
+		return Utilities.decrypt(s, b);
 	}
 
 
 	// Return the number of words in String s that end with String substring
 	// You can assume there are no punctuation marks between words
 	public static int wordsEndsWithSubstring(String s, String substring) {
-		return 0;
+		int count = 0;
+		boolean t = true;
+		for (int i = 0; i < s.length(); i++) {
+			t = true;
+			if (s.charAt(i)==' ' && i > substring.length()) {
+				for (int j = substring.length()-1; j > -1; j--) {
+					if (s.charAt(i-1+j-(substring.length()-1)) != substring.charAt(j)) {
+						t = false;
+					}
+				}
+				if (t) {
+					count+=1;
+				}
+			}
+			
+		}
+		return count;
+			
 	}
 	
 
@@ -131,7 +149,14 @@ public class StringMethods {
 	// of String substring and the final occurrence
 	// You can assume that substring will appear at least twice
 	public static int distance(String s, String substring) {
-		return 0;
+		int k = s.indexOf(substring) + substring.length();
+		int g = s.lastIndexOf(substring);
+		int y = g-k;
+		System.out.println(s);
+		System.out.println(substring);
+		System.out.println(k);
+		System.out.println(g);
+		return y;	
 	}
 
 
@@ -139,7 +164,34 @@ public class StringMethods {
 	// palindromes are words or phrases are read the same forward as backward.
 	// HINT: ignore/remove all punctuation and spaces in the String
 	public static boolean palindrome(String s) {
-		return true;
+		String a = "";
+		String b = "";
+		for (int i = 0; i < s.length(); i++) {
+			if (s.charAt(i)==' ') {
+				String k = "";
+				k += s.charAt(i);
+				s = s.replace(k, "");
+			}
+		}
+		String puncuations = ";,!?-_-:.";
+		for (int i = 0; i < s.length(); i++) {
+			String v = "";
+			v = "" + s.charAt(i);
+			if (puncuations.contains(v)) {
+				s = s.replace(v, "");
+			}
+		}
+		for (int i = 0; i < s.length(); i++) {
+			a += s.charAt(i);
+		}
+		for (int i = s.length()-1; i > -1; i--) {
+			b+= s.charAt(i);
+		}
+		if (a.equalsIgnoreCase(b)) {
+			return true;
+		}
+		
+		return false;
 	}
 	
 }
